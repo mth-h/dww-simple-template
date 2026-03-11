@@ -1,0 +1,14 @@
+/* this is a CSS comment */
+
+/* :root is a pseudo element to store the variables (colors, spaces, etc) */
+:root{
+    --main-color: #313647;
+    --secondary-color: #FFF8D4;
+}
+
+
+body {
+    /* to use a variable content, just "call" it by its name */
+    background-color: var(--secondary-color);
+}
+
