@@ -1,14 +1,277 @@
-/* this is a CSS comment */
+/* ============================================================
+   LONDON THEATRE — style.css
+   Translating the Figma prototype into CSS.
+   Structure: Variables → Reset → Header → Grid → Cards → Typography
+   ============================================================ */
 
-/* :root is a pseudo element to store the variables (colors, spaces, etc) */
-:root{
-    --main-color: #313647;
-    --secondary-color: #FFF8D4;
+/* =====================
+   1. CSS VARIABLES
+   All design tokens from the Figma prototype live here.
+   Changing a value here updates the whole site consistently.
+   ===================== */
+:root {
+  --color-black:      #111111;
+  --color-white:      #ffffff;
+  --color-green:      #2d6a2d;   /* used for Oleanna, Wicked titles */
+  --color-gold:       #b8860b;   /* used for Mirror and the Light title */
+  --color-red:        #b22222;   /* used for The Play That Goes Wrong title */
+  --color-border:     #cccccc;   /* thin grid dividers between cards */
+  --color-bg:         #ffffff;
+  --color-blue:       #85B9E8;
+  --color-burgundy:   #793039;
+  --color-neongreen:  #27C840;
+
+
+  /* Typography */
+  --font-display: "Major Mono Display", monospace;   /* show titles */
+  --font-mono: "Space Mono", monospace;
+
+  /* Spacing */
+  --header-height:    60px;
+  --card-padding:     24px;
+  --grid-gap:         0px;  /* no gap — borders handle visual separation */
 }
 
+.major-mono-display-regular {
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+/* =====================
+   2. RESET & BASE STYLES
+   Remove browser defaults so we have full control.
+   box-sizing: border-box makes width/padding predictable.
+   ===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-    /* to use a variable content, just "call" it by its name */
-    background-color: var(--secondary-color);
+  font-family: var(--font-mono);
+  background-color: var(--color-bg);
+  color: var(--color-black);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
+img {
+  display: block;         /* removes inline-block gap under images */
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills the image container without distortion */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* =====================
+   3. HEADER
+   Flexbox row: logo on the left, nav on the right.
+   A bottom border separates it from the content.
+   ===================== */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Logo uses the display font and bold weight */
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+/* Nav links are spaced out and use monospace uppercase */
+.main-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.nav-link:hover {
+  text-decoration: underline; /* simple hover feedback */
+}
+
+/* The first character of each nav item has a special stylized appearance */
+.nav-first {
+  font-style: italic;
+  font-weight: 900;
+}
+
+
+/* =====================
+   4. MAIN SHOW GRID
+   A 2-column CSS Grid, each row auto-sized to its content.
+   Cards sit directly next to each other with no gap —
+   borders on individual cards create the visual dividers.
+   ===================== */
+.show-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* two equal columns */
+  grid-template-rows: auto;
+}
+
+
+/* =====================
+   5. SHOW CARDS
+   Each card is a flex row.
+   Two variants: image-left (poster | text) and image-right (text | poster).
+   ===================== */
+.show-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;       /* poster and text block share the same height */
+  min-height: 260px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Image on the left side of the card */
+.card-image-left {
+  flex-direction: row;
+}
+
+/* Image on the right side — we reverse the flex order */
+.card-image-right {
+  flex-direction: row-reverse;
+}
+
+/* Top border separates card rows visually */
+.card-border-top {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Left border separates the two columns visually */
+.card-border-left {
+  border-left: 1px solid var(--color-border);
+}
+
+
+/* =====================
+   6. POSTER IMAGE
+   Fixed width so text always has room to breathe.
+   overflow: hidden on the card + object-fit: cover fills the frame cleanly.
+   ===================== */
+.show-poster {
+  width: 295px;
+  min-width: 295px;   /* prevents shrinking on narrow containers */
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;     /* don't squeeze the image */
+}
+
+
+/* =====================
+   7. SHOW INFO (text block)
+   Grows to fill remaining card width.
+   Internal padding keeps text away from edges.
+   ===================== */
+.show-info {
+  flex: 1;
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+/* =====================
+   8. SHOW TITLES
+   Large, bold, uppercase using the display serif font.
+   Color variants match the Figma color coding per show type.
+   ===================== */
+.show-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Color variants */
+.title-black { color: var(--color-black); }
+.title-green { color: var(--color-green); }
+.title-gold  { color: var(--color-gold);  }
+.title-red   { color: var(--color-red);   }
+
+
+/* =====================
+   9. CATEGORY LABELS
+   e.g. "MUSICALS", "PLAYS", "COMEDIES"
+   Monospace, bold, small — sits below the title.
+   The .cat-icon span adds stylized letter substitutions matching the prototype.
+   ===================== */
+.show-category {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+/* The decorative icon/character inside the category label */
+.cat-icon {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+
+/* =====================
+   10. SHOW DESCRIPTION
+   Body text — readable, not too long, standard line height.
+   ===================== */
+.show-desc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: #333333;
+  margin-top: 4px;
+}

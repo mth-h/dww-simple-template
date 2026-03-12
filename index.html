@@ -1,26 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>London Theatre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Designing with web template</title>
-
-    <!-- load the external css stylesheet -->
-     <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- this is an html comment -->
 
-    <h1>Hello world</h1>
+  <!-- =====================
+       HEADER / NAVIGATION
+       Contains the site logo on the left and nav links on the right
+       ===================== -->
+  <header class="site-header">
+    <div class="logo">
+      <!-- Each letter is wrapped so we can style select ones differently (bold decorative effect) -->
+      <span class="logo-text text-neongreen">LONDON THEATRE</span>
+    </div>
 
+    <nav class="main-nav">
+      <!-- Nav items use a decorative first-letter style, matching the Figma prototype -->
+      <a href="#" class="nav-link"><span class="nav-first">C</span>ALENDAR</a>
+      <a href="#" class="nav-link"><span class="nav-first">∇</span>ENUES</a>
+      <a href="#" class="nav-link"><span class="nav-first">T</span>ICKETS</a>
+    </nav>
+  </header>
 
+  <!-- =====================
+       MAIN SHOW GRID
+       A 2-column grid where each cell is a "show card"
+       Each card has: poster image + text block (title, category, description)
+       ===================== -->
+  <main class="show-grid">
 
+    <!-- ---- ROW 1 ---- -->
 
-    <!-- lucide icons, do not touch 👮🏻‍♂️ -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+    <!-- Card 1: Dear Evan Hansen — image LEFT, text RIGHT -->
+    <article class="show-card card-image-left">
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/dear-evan-hansen.jpg"
+        alt="Dear Evan Hansen poster"
+        class="show-poster"
+      />
+      <div class="show-info">
+        <h2 class="show-title title-blue">Dear Evan Hansen</h2>
+        <!-- Category label styled with decorative letter substitutions -->
+        <p class="show-category">MUSICALS</p>
+        <p class="show-desc">
+          The smash-hit Broadway musical Dear Evan Hansen, from the writers of
+          La La Land and The Greatest Showman, transferred to London's Noel
+          Coward Theatre in November 2019. Dear Evan Hansen tickets are
+          available on London Theatre now.
+        </p>
+      </div>
+    </article>
+
+    <!-- Card 2: Oleanna — image LEFT, text RIGHT -->
+    <article class="show-card card-image-left card-border-left">
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/oleanna.jpg"
+        alt="Oleanna poster"
+        class="show-poster"
+      />
+      <div class="show-info">
+        <h2 class="show-title title-gold">Oleanna</h2>
+        <p class="show-category">PLAYS</p>
+        <p class="show-desc">
+          David Mamet's Oleanna is in London in 2021. Oleanna is at the Arts
+          Theatre from July 2021. Oleanna tickets are available on London
+          Theatre now.
+        </p>
+      </div>
+    </article>
+
+    <!-- ---- ROW 2 ---- -->
+
+    <!-- Card 3: Pride and Prejudice — text LEFT, image RIGHT -->
+    <article class="show-card card-image-right card-border-top">
+      <div class="show-info">
+        <h2 class="show-title title-burgundy">Pride And Prejudice * (Sort Of)</h2>
+        <p class="show-category">COMEDIES</p>
+        <p class="show-desc">
+          It's a truth universally acknowledged that a Jane Austen novel must
+          be adapted — and this time, 30 years of pop hits and an irreverent
+          all-female cast bring a bold new Pride and Prejudice to the Criterion
+          Theatre!
+        </p>
+      </div>
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/pride-and-prejudice-sort-of.jpg"
+        alt="Pride and Prejudice poster"
+        class="show-poster"
+      />
+    </article>
+
+    <!-- Card 4: Wicked — text LEFT, image RIGHT -->
+    <article class="show-card card-image-right card-border-top card-border-left">
+      <div class="show-info">
+        <h2 class="show-title title-green">WICKED</h2>
+        <p class="show-category">MUSICALS</p>
+        <p class="show-desc">
+          Since opening on Broadway in 2003, Wicked has taken the world of
+          musical theatre by storm.
+        </p>
+      </div>
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/wicked.jpg"
+        alt="Wicked poster"
+        class="show-poster"
+      />
+    </article>
+
+    <!-- ---- ROW 3 ---- -->
+
+    <!-- Card 5: The Mirror and the Light — image LEFT, text RIGHT -->
+    <article class="show-card card-image-left card-border-top">
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/the-mirror-and-the-light.jpg"
+        alt="The Mirror and the Light poster"
+        class="show-poster"
+      />
+      <div class="show-info">
+        <h2 class="show-title title-gold">THE MIRROR AND THE LIGHT</h2>
+        <p class="show-category">PLAYS</p>
+        <p class="show-desc">Show of the Week — Special prices available</p>
+      </div>
+    </article>
+
+    <!-- Card 6: The Play That Goes Wrong — image LEFT, text RIGHT -->
+    <article class="show-card card-image-left card-border-top card-border-left">
+      <img
+        src="https://makerslab.em-lyon.com/dww/data/shows/the-play-that-goes-wrong.jpg"
+        alt="The Play That Goes Wrong poster"
+        class="show-poster"
+      />
+      <div class="show-info">
+        <h2 class="show-title title-red">THE PLAY THAT GOES WRONG</h2>
+        <p class="show-category">COMEDIES</p>
+        <p class="show-desc">
+          Putting Mischief Theatre firmly on the map, The Play That Goes Wrong
+          continues to leave audiences in fits of giggles at the Duchess Theatre.
+        </p>
+      </div>
+    </article>
+
+  </main><!-- end .show-grid -->
+
 </body>
 </html>
