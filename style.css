@@ -101,12 +101,16 @@ a {
    A bottom border separates it from the content.
    ===================== */
 .site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  height: var(--header-height);
-  border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;              /* sticks to the very top of the viewport when scrolling */
+    z-index: 100;        /* keeps it above the cards so they scroll behind it */
+    background-color: var(--color-white); /* prevents cards from showing through */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: var(--header-height);
+    border-bottom: 1px solid var(--color-black);
 }
 
 /* Logo uses the display font and bold weight */
@@ -126,7 +130,7 @@ a {
 }
 
 .nav-link {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);  /* Major Mono Display, matching the Figma nav style */
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -152,9 +156,11 @@ a {
    borders on individual cards create the visual dividers.
    ===================== */
 .show-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;   /* two equal columns */
-  grid-template-rows: auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* two equal columns */
+    grid-template-rows: auto;
+    gap: 20px; /* controls space between all cards */
 }
 
 
@@ -170,6 +176,7 @@ a {
   min-height: 260px;
   padding: 0;
   overflow: hidden;
+  border: 1px solid var(--color-black); /* all 4 sides */
 }
 
 /* Image on the left side of the card */
@@ -182,14 +189,15 @@ a {
   flex-direction: row-reverse;
 }
 
-/* Top border separates card rows visually */
+/* Top border — double style creates two parallel black lines with a gap between them,
+   matching the Figma divider between rows. The total width (6px) controls line thickness + gap. */
 .card-border-top {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-black);
 }
 
-/* Left border separates the two columns visually */
+/* Left border — same double line treatment for the column divider */
 .card-border-left {
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-black);
 }
 
 
@@ -236,10 +244,15 @@ a {
 }
 
 /* Color variants */
-.title-black { color: var(--color-black); }
-.title-green { color: var(--color-green); }
-.title-gold  { color: var(--color-gold);  }
-.title-red   { color: var(--color-red);   }
+.title-black    { color: var(--color-black);    }
+.title-green    { color: var(--color-green);    }
+.title-gold     { color: var(--color-gold);     }
+.title-red      { color: var(--color-red);      }
+.title-blue     { color: var(--color-blue);     }  /* Dear Evan Hansen */
+.title-burgundy { color: var(--color-burgundy); }  /* Pride and Prejudice */
+
+/* Logo neon green — applied via class="text-neongreen" on the logo span in HTML */
+.text-neongreen { color: var(--color-neongreen); }
 
 
 /* =====================
