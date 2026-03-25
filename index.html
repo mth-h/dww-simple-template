@@ -1,4 +1,35 @@
 <!DOCTYPE html>
+<!--
+  AI TOOL DISCLOSURE - Option B
+
+  Tool used: Claude (claude.ai)
+
+  Prompts I used:
+  - "Write an HTML page for a London Theatre website. It should have a sticky header
+    with a logo on the left ('LONDON THEATRE' in Major Mono Display font, neon green)
+    and three nav links on the right (Calendar, Venues, Tickets). Use Space Mono for
+    body text. Link to an external style.css file."
+
+  - "Create a 2-column show grid with 6 show cards. Each card should have a poster
+    image and a text block (title, category, short description). Alternate between
+    image-left and image-right layouts. Shows: Dear Evan Hansen (MUSICALS, blue),
+    Oleanna (PLAYS, gold), Pride and Prejudice Sort Of (COMEDIES, burgundy),
+    Wicked (MUSICALS, green), The Mirror and the Light (PLAYS, gold),
+    The Play That Goes Wrong (COMEDIES, red)"
+
+  Mistakes I found:
+
+  1. The <span class="nav-first"> before each nav link is empty — the AI added it
+     saying it would create a "special stylized first letter" but the span has no
+     content and the CSS doesn't add anything to it either so it does nothing visually.
+
+  2. The <main> grid has no horizontal padding so cards go right to the edge of the
+     screen, while the header has 24px on each side. It's inconsistent.
+
+  3. There are no alterning between the image-left and image-right layouts. There are 
+      only image-left layouts. 
+
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />

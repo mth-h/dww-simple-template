@@ -4,6 +4,39 @@
    Structure: Variables → Reset → Header → Grid → Cards → Typography
    ============================================================ */
 
+/*
+  AI TOOL DISCLOSURE - Option B
+
+  Tool used: Claude (claude.ai)
+
+  Prompts I used:
+  - "Write a CSS stylesheet for the London Theatre site. Use CSS custom properties
+    for all colours and fonts. Fonts are Major Mono Display for titles/logo and
+    Space Mono for body. The header should be sticky, 60px tall, with a bottom border."
+
+  - "Style a 2-column CSS grid of show cards. Each card is a flex row with a
+    fixed-width poster (295px) and a text block. Add border utility classes
+    (.card-border-top, .card-border-left) so cards in rows 2 and 3 get a top
+    border, and right-column cards get a left border."
+
+  - "Add title colour variants for each show: blue, gold, burgundy, green, red."
+
+  Mistakes I found:
+
+  1. The comment on .card-border-top and .card-border-left says it creates "two
+     parallel black lines with a gap" (double border effect) but the actual CSS is
+     just 1px solid — a normal single line. To get a real double line you'd need
+     border-style: double and at least 3px. The comment is just wrong.
+
+  2. --grid-gap is defined in :root as 0px but never actually used — .show-grid
+     uses gap: 20px written directly instead of var(--grid-gap). So changing the
+     variable would do nothing.
+
+  3. The comment on --color-green says "used for Oleanna, Wicked titles" but
+     Oleanna uses .title-gold (the gold colour), not green. Only Wicked uses green.
+     The AI got the mapping wrong.
+*/
+
 /* =====================
    1. CSS VARIABLES
    All design tokens from the Figma prototype live here.
@@ -12,8 +45,8 @@
 :root {
   --color-black:      #111111;
   --color-white:      #ffffff;
-  --color-green:      #2d6a2d;   /* used for Oleanna, Wicked titles */
-  --color-gold:       #b8860b;   /* used for Mirror and the Light title */
+  --color-green:      #2d6a2d;   /* used for Wicked title only (not Oleanna, see mistake above) */
+  --color-gold:       #b8860b;   /* used for Oleanna and Mirror and the Light titles */
   --color-red:        #b22222;   /* used for The Play That Goes Wrong title */
   --color-border:     #cccccc;   /* thin grid dividers between cards */
   --color-bg:         #ffffff;
@@ -29,7 +62,7 @@
   /* Spacing */
   --header-height:    60px;
   --card-padding:     24px;
-  --grid-gap:         0px;  /* no gap — borders handle visual separation */
+  --grid-gap:         0px;  /* defined but never used — .show-grid hard-codes gap: 20px instead */
 }
 
 .major-mono-display-regular {
@@ -143,6 +176,7 @@ a {
 }
 
 /* The first character of each nav item has a special stylized appearance */
+/* note: the span in HTML is empty so this doesn't actually show anything */
 .nav-first {
   font-style: italic;
   font-weight: 900;
@@ -189,13 +223,13 @@ a {
   flex-direction: row-reverse;
 }
 
-/* Top border — double style creates two parallel black lines with a gap between them,
-   matching the Figma divider between rows. The total width (6px) controls line thickness + gap. */
+/* adds a top border to cards in rows 2 and 3
+   note: the original AI comment said this was a "double line" effect — it's not, it's just 1px solid */
 .card-border-top {
   border-top: 1px solid var(--color-black);
 }
 
-/* Left border — same double line treatment for the column divider */
+/* adds a left border to right-column cards */
 .card-border-left {
   border-left: 1px solid var(--color-black);
 }
